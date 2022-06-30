@@ -21,7 +21,7 @@ port = 5000
 CORS(app, resources={r'/*': {'origins': '*'}})
 
 #configurate Database
-app.config['SQLALCHEMY_DATABASE_URI'] = "mysql://root:Weinflasche0815@127.0.0.1/depals" 
+app.config['SQLALCHEMY_DATABASE_URI'] = "mysql://root:pw@127.0.0.1/depals" 
 
 db = SQLAlchemy(app)
 ma = Marshmallow(app)
