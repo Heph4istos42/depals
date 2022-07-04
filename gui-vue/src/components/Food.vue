@@ -1,39 +1,35 @@
-<script setup>
-    import IconRedDot from './icons/RedDot.vue'
-    import IconGreenDot from './icons/GreenDot.vue'
-</script>
 <template>
     <div class="plan">
     <ul style="list-style-type: none; padding: unset">
-        <img src='src:https://image.freepik.com/free-photo/image-human-brain_99433-298.jpg' width="300" height="300">
+        <img :src="item.src" width="300" height="300">
         <table border="0"> 
         <tr>
-            <th>Lebensmittel.bezeichnung</th>
+            <th> {{ item.name }}</th>
             <th>
-            <div id="kreis-green"></div>
-            <div id="kreis-yellow"></div>
-            <div id="kreis-red"></div>
-                </th>
+                <div id="kreis-green"></div>
+                <div id="kreis-yellow"></div>
+                <div id="kreis-red"></div>
+            </th>
         </tr>
         <tr>
             <td>kcal:</td>
-            <td>Lebensmittel.kcal</td>
+            <td> {{ item.kcal }}</td>
         </tr>
         <tr>
             <td>contains:</td>
-            <td>Lebensmittel.contains</td>
+            <td> {{ item.contains}} </td>
         </tr>
         <tr>
             <td>protein:</td>
-            <td>lebensmittel.protein</td>
+            <td> {{ item.protein }} </td>
         </tr>
         <tr>
             <td>carbohydrates:</td>
-            <td>Lebensmittel.carbohydrates</td>
+            <td> {{ item.carbohydrates }} </td>
         </tr>
         <tr>
             <td>fat:</td>
-            <td>lebensmittel.fat</td>
+            <td> {{ item.fat }} </td>
         </tr>
         <tr>
             <td><button class="btnRate"> + add to plan</button></td>
@@ -43,6 +39,27 @@
     </ul>
     </div>
 </template>
+
+
+<script>
+export default {
+    data(){
+        return {
+            item: {
+                name: 'Milch',
+                kcal: '42 kcal',
+                contains: '/',
+                protein: '3,4g',
+                carbohydrates: '5g',
+                fat: '1g',
+                src: 'https://image.freepik.com/free-photo/image-human-brain_99433-298.jpg'
+            }
+        }
+    }
+    
+}
+
+</script>
 
 <style>
     .btnActivate {
@@ -60,6 +77,8 @@
     .plan {
         width: 100%;
         text-align: center;
+        justify-content: center;
+        display: flex;
     }
     #kreis-green {
     background-color: #7CFC00;

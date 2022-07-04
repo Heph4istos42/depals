@@ -1,6 +1,6 @@
 /* Set up using Vue 3 */
 import { createApp } from 'vue'
-import Plan from './Plan.vue'
+import Plan from './components/Plan.vue'
 
 /* import the fontawesome core */
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -15,7 +15,7 @@ import { faCirclePlus } from '@fortawesome/free-solid-svg-icons'
 import { faGears } from '@fortawesome/free-solid-svg-icons'
 import { faList } from '@fortawesome/free-solid-svg-icons'
 import { faBarcode } from '@fortawesome/free-solid-svg-icons'
-import VueRouter from 'vue-router'
+
 
 /* add icons to the library */
 library.add(faUserSecret)
