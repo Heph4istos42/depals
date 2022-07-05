@@ -1,12 +1,12 @@
 <template>
-    <ul>
-        <li class="list" v-for="item in lebensmittel">
+    <div id="listWrapper">
+        <div class="list" v-for="item in lebensmittel">
             <img :src="item.img" :alt="item.bezeichnung" width="100" height="100" />
             <button class="listitem">
                 {{ item.bezeichnung }}
             </button>
-        </li>
-    </ul>
+        </div>
+    </div>
 
 </template>
 
@@ -42,5 +42,8 @@ import { getAllLebensmittel } from '../httprequest'
         font-size: 32px;
         /* font-weight: 600; */
         color: white;
+    }
+    #listWrapper {
+      margin-bottom: 75px;
     }
 </style>

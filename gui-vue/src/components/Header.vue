@@ -1,5 +1,4 @@
 <template>
-
  <div class="head"> <font-awesome-icon icon="fa-solid fa-apple-whole" /> {{ title }}</div> 
 </template>
 
@@ -23,6 +22,10 @@ export default {
         text-align: center;
         padding: 20px 0;
         border-bottom: 1px solid #9e9a9a;
+        position: fixed;
         width: 100%;
+        top: 0;
+        border-bottom-right-radius: 20px;
+        border-bottom-left-radius: 20px;
     }
 </style>
