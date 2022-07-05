@@ -168,19 +168,30 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- INSERT DATA
 -- -----------------------------------------------------
 insert lebensmittel(barcodeID,bezeichnung,img,kcal,contains,fat,carbohydrates,protein) value 
-('4316268365888','DEPALS-Schokokuchen', 'http://localhost/img/depals/schoko.jpg', 880,'Nuts',20,30,8),
-('2910041002162','DEPALS-Apfel', 'http://localhost/img/depals/appel.jpg', 60,'',3,2,4),
-('4009249019923','Toast', 'http://localhost/img/depals/toastcat.jpg', 313,'',56,4,3);
+('4316268365888','Schokokuchen', 'http://localhost/img/depals/schoko.jpg', 880,'Nuts',20,30,8),
+('2910041002162','Apfel', 'http://localhost/img/depals/appel.jpg', 60,'',3,2,4),
+('4009249019923','Toast', 'http://localhost/img/depals/toastcat.jpg', 313,'',56,4,3),
+('4056489230847','Pizza', 'http://localhost/img/depals/pizza.jpg', 239,'',7,32,10),
+('4337185372414','Avocado', 'http://localhost/img/depals/avocado.jpg',160,'',13,2,2),
+('4001337786250','Mettigel', 'http://localhost/img/depals/mettigel.jpg', 130,'',4,1,21),
+('4388844293007','Melone', 'http://localhost/img/depals/melone.jpg', 39,'',0,8,0.6),
+('5425003611469','Banane', 'http://localhost/img/depals/banane.jpg', 96,'',0,22,1),
+('4005080426135','Kartoffel', 'http://localhost/img/depals/kartoffel.jpg', 140,'',0,30,4),
+('4388860125979','Ananas', 'http://localhost/img/depals/ananas.jpg', 59,'',0,12,1);
+
 
 insert lebensmittel_has_lebensmittel(Lebensmittel_barcodeID,Lebensmittel_barcodeID1) value
-('4316268365888','2910041002162 ');
+('4316268365888','2910041002162'),
+('4056489230847','4005080426135');
 
 insert nutzer(userName,weight,height,hashedPassword,authCookie) value 
 ('SimonUgar',80.1,180.5,'5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5',''); -- pw: 12345
 
 insert plan(planID,comment,stars,userName) value
 (1,'Bester Plan',3,'SimonUgar'),
-(2,'mieser Plan',1,'SimonUgar');
+(2,'mieser Plan',1,'SimonUgar'),
+(3,'Cheat Day',5, 'SimonUgar'),
+(4,'Obstsalat',4,'SimonUgar');
 
 insert tag(tagID,beschreibung) value
 (1,'Kakao'),
@@ -188,7 +199,15 @@ insert tag(tagID,beschreibung) value
 
 insert lebensmittel_has_plan(Lebensmittel_barcodeID,Plan_planID, Plan_Nutzer) value
 ('4316268365888',1, 'SimonUgar'), 
-('2910041002162 ',1, 'SimonUgar');
+('2910041002162',1, 'SimonUgar'),
+('4009249019923',2, 'SimonUgar'),
+('4056489230847',3, 'SimonUgar'),
+('4001337786250',3, 'SimonUgar'),
+('4337185372414',3, 'SimonUgar'),
+('4388844293007',4, 'SimonUgar'),
+('5425003611469',4, 'SimonUgar'),
+('4388860125979',4, 'SimonUgar'),
+('2910041002162',4, 'SimonUgar');
 
 insert tag_has_lebensmittel(Tag_tagID,Lebensmittel_barcodeID) value
 (1,4316268365888),
