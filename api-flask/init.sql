@@ -21,6 +21,7 @@ DROP TABLE IF EXISTS `DEPALS`.`Lebensmittel` ;
 CREATE TABLE IF NOT EXISTS `DEPALS`.`Lebensmittel` (
   `barcodeID` VARCHAR(50) NOT NULL,
   `bezeichnung` VARCHAR(50) NOT NULL,
+  `img`Varchar(100) NULL,
   `kcal` INT NULL,
   `contains` VARCHAR(500) NULL,
   `fat` INT NULL,
@@ -166,9 +167,10 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 -- INSERT DATA
 -- -----------------------------------------------------
-insert lebensmittel(barcodeID,bezeichnung,kcal,contains,fat,carbohydrates,protein) value 
-('4316268365888','DEPALS-Schokokuchen',880,'Nuts',20,30,8),
-('2910041002162 ','DEPALS-Apfel',60,'',3,2,4);
+insert lebensmittel(barcodeID,bezeichnung,img,kcal,contains,fat,carbohydrates,protein) value 
+('4316268365888','DEPALS-Schokokuchen', 'http://localhost/img/depals/schoko.jpg', 880,'Nuts',20,30,8),
+('2910041002162','DEPALS-Apfel', 'http://localhost/img/depals/appel.jpg', 60,'',3,2,4),
+('4009249019923','Toast', 'http://localhost/img/depals/toastcat.jpg', 313,'',56,4,3);
 
 insert lebensmittel_has_lebensmittel(Lebensmittel_barcodeID,Lebensmittel_barcodeID1) value
 ('4316268365888','2910041002162 ');
@@ -184,9 +186,9 @@ insert tag(tagID,beschreibung) value
 (1,'Kakao'),
 (2,'Nuts');
 
-insert lebensmittel_has_plan(Lebensmittel_barcodeID,Plan_planID) value
-('4316268365888',1), 
-('2910041002162 ',1);
+insert lebensmittel_has_plan(Lebensmittel_barcodeID,Plan_planID, Plan_Nutzer) value
+('4316268365888',1, 'SimonUgar'), 
+('2910041002162 ',1, 'SimonUgar');
 
 insert tag_has_lebensmittel(Tag_tagID,Lebensmittel_barcodeID) value
 (1,4316268365888),
