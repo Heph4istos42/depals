@@ -7,48 +7,24 @@ import MenuElem from './Menu.vue'
 </script>
 
 <template>
-    <header>
-      <HeaderElem />
-    </header>
-    <div></div>
-    <div >
-      <ul>
-        <li> <PlanManager /></li>
-        <li> <Trenner /> </li>
-        <li> <Listen /> </li>
-      </ul>
-      </div>
-      <div></div>
-      
-      <MenuElem />
-    
+  <HeaderElem />
+  <PlanManager />
+  <Trenner /> 
+  <Listen /> 
+  <MenuElem />
 </template>
 
 <script>
   export default {
-      data() {
-        return {
-            items: [
-            { text:'Lebensmittel1',src:'logo.svg', alt:'Lebensmittel1'},
-            {text:'Lebensmittel2'},
-            {text:'Lebensmittel3'}, 
-            {text:'Lebensmittel4'}, 
-            {text:'Lebensmittel5'}]
-        }
-      },
-
-  
-      
+    data() {
+      return {
+      } 
+    }
   }
+  
 </script>
 
 <style>
-
-ul {
-  list-style-type: none;
-  padding: unset;
-}
-
 .list {
   display: flex;
   align-items: center;
@@ -58,7 +34,6 @@ ul {
 #app {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
   font-weight: normal;
 }
 </style>
