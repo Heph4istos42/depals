@@ -46,4 +46,7 @@ import { getAllLebensmittel } from '../httprequest'
     #listWrapper {
       margin-bottom: 75px;
     }
+    img {
+      border-radius: 50%;
+    }
 </style>

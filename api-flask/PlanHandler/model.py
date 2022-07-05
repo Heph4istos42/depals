@@ -1,6 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
-from sqlalchemy.schema import ForeignKeyConstraint
 
 db = SQLAlchemy()
 ma = Marshmallow()
@@ -26,6 +25,7 @@ connectedLebensmittel = db.Table('lebensmittel_has_lebensmittel',
 class Lebensmittel(db.Model):    
     barcodeID = db.Column(db.String(50), primary_key=True, nullable=False)
     bezeichnung = db.Column(db.String(50), nullable=False)
+    img = db.Column(db.String(100))
     kcal = db.Column(db.Integer)
     contains = db.Column(db.String(500))
     fat = db.Column(db.Integer)
@@ -40,9 +40,10 @@ class Lebensmittel(db.Model):
     tagOfLebensmittel = db.relationship("Tag",
                                secondary=lebensmitelTags)
             
-    def __init__(self, barcodeID, bezeichnung, kcal, contains, fat, carbohydrates, protein):
+    def __init__(self, barcodeID, bezeichnung, img, kcal, contains, fat, carbohydrates, protein):
         self.barcodeID = barcodeID
         self.bezeichnung = bezeichnung
+        self.img = img
         self.kcal = kcal
         self.contains = contains
         self.fat = fat
@@ -50,24 +51,23 @@ class Lebensmittel(db.Model):
         self.protein = protein
 
 planLebensmittel = db.Table('lebensmittel_has_plan',
-    db.Column('planID', db.Integer, primary_key=True),
-    db.Column('planUser', db.Integer, primary_key=True),
-    db.Column('lebensmittel', db.String(50), db.ForeignKey('lebensmittel.barcodeID'), primary_key=True),
-    ForeignKeyConstraint(['planID', 'planUser'], ['plan.planID', 'plan.userName'])
+    db.Column('plan', db.Integer, db.ForeignKey('plan.planID'), primary_key=True),
+    db.Column('lebensmittel', db.String(50), db.ForeignKey('lebensmittel.barcodeID'), primary_key=True)
 )
 
 class Plan(db.Model):    
     planID = db.Column(db.Integer, primary_key=True)
     comment = db.Column(db.String(400))
     stars = db.Column(db.Integer)
-    userName = db.Column(db.String(100), db.ForeignKey('nutzer.username'), primary_key=True)
+    planUser = db.Column(db.String(100), db.ForeignKey('nutzer.username'), primary_key=True)
     lebensmittelOfPlan = db.relationship("Lebensmittel",
                     secondary=planLebensmittel)
 
-    def __init__(self, comment, stars, userName):
+    def __init__(self, planID, comment, stars, planUser):
+        self.planID = planID
         self.comment = comment
         self.stars = stars
-        self.userName = userName
+        self.planUser = planUser
 
 class Nutzer(db.Model):    
     username = db.Column(db.String(100), primary_key=True, nullable=False)

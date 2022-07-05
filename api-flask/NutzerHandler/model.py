@@ -25,6 +25,7 @@ connectedLebensmittel = db.Table('lebensmittel_has_lebensmittel',
 class Lebensmittel(db.Model):    
     barcodeID = db.Column(db.String(50), primary_key=True, nullable=False)
     bezeichnung = db.Column(db.String(50), nullable=False)
+    img = db.Column(db.String(100))
     kcal = db.Column(db.Integer)
     contains = db.Column(db.String(500))
     fat = db.Column(db.Integer)
@@ -39,9 +40,10 @@ class Lebensmittel(db.Model):
     tagOfLebensmittel = db.relationship("Tag",
                                secondary=lebensmitelTags)
             
-    def __init__(self, barcodeID, bezeichnung, kcal, contains, fat, carbohydrates, protein):
+    def __init__(self, barcodeID, bezeichnung, img, kcal, contains, fat, carbohydrates, protein):
         self.barcodeID = barcodeID
         self.bezeichnung = bezeichnung
+        self.img = img
         self.kcal = kcal
         self.contains = contains
         self.fat = fat
