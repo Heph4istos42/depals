@@ -1,30 +1,34 @@
 <template>
     <ul>
-    <li class="list" v-for="item in items">
-    <img :src="item.src" :alt="item.alt" width="100" height="100" />
-    <button class="listitem">
-    {{ item.text }}
-    </button>
-    
-    </li>
+        <li class="list" v-for="item in lebensmittel">
+            <img :src="item.img" :alt="item.bezeichnung" width="100" height="100" />
+            <button class="listitem">
+                {{ item.bezeichnung }}
+            </button>
+        </li>
     </ul>
 
 </template>
 
 <script>
-  export default {
+
+import { getAllLebensmittel } from '../httprequest'
+
+    export default {
       data() {
         return {
-            items: [
-            {text:'Lebensmittel1', src:'https://image.freepik.com/free-photo/image-human-brain_99433-298.jpg', alt:'L1'},
-            {text:'Lebensmittel2', src: '../assets/logo.svg', alt:'L2'},
-            {text:'Lebensmittel3'}, 
-            {text:'Lebensmittel4'}, 
-            {text:'Lebensmittel5'}]
+            lebensmittel: []
         }
       },
-      
-  }
+      mounted() {
+        getAllLebensmittel().then(response => { 
+          console.debug(response);
+          this.lebensmittel = response['lebensmittel'];
+          
+          console.debug(this.lebensmittel[0]['bezeichnung']);
+        });
+      }
+    }
 </script>
 <style>
     .listitem{
@@ -32,5 +36,11 @@
         height: 100px;
         margin-left: 10px;
         margin-top: 5px;
+        border: none;
+        border-radius: 16px;
+        background: gray;
+        font-size: 32px;
+        /* font-weight: 600; */
+        color: white;
     }
 </style>

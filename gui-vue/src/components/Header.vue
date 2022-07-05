@@ -21,8 +21,7 @@ export default {
     .head{
         background-color: #9e9a9a;
         text-align: center;
-        padding: 20px;
-        margin-right: 10px;
+        padding: 20px 0;
         border-bottom: 1px solid #9e9a9a;
         width: 100%;
     }

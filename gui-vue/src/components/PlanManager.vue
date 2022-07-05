@@ -4,12 +4,10 @@
 </script>
 <template>
     <div class="plan">
-    <ul style="list-style-type: none; padding: unset">
-    <li v-if="!activated"> <IconRedDot /> <button class="btnActivate" @click="activated = true"> Activate Plan </button></li>
-    <li v-else> <IconGreenDot /> <button class="btnActivate" disabled> Active Plan </button></li>
-    <li> <button class="btnRate" @click="activated = false">Reset</button></li>
-    <li><button class="btnRate"> Rate Your Plan </button></li>
-    </ul>
+        <div v-if="!activated"> <IconRedDot /> <button class="btnActivate" @click="activated = true"> Activate Plan </button></div>
+        <div v-else> <IconGreenDot /> <button class="btnActivate" disabled> Active Plan </button> </div>
+        <div> <button class="btnRate" @click="activated = false">Reset</button></div>  
+        <div><button class="btnRate"> Rate Your Plan </button> </div>
     </div>
 </template>
 
