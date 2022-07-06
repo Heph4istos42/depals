@@ -20,7 +20,7 @@
       <font-awesome-icon class="menu-icon" icon="fa-solid fa-list" />
     </router-link>
 
-    <router-link :event="['keyup']" to="/plan" class=" menu-icon-wrapper menu-icon-wrapper-right" :class="{ menuIconWrapperActive: settingsActive}">
+    <router-link :event="['keyup']" to="/settings" class=" menu-icon-wrapper menu-icon-wrapper-right" :class="{ menuIconWrapperActive: settingsActive}">
         <font-awesome-icon class="menu-icon" icon="fa-solid fa-gears" />
     </router-link>
   </div>

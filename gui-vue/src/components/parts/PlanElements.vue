@@ -1,18 +1,17 @@
 <script setup>
     defineProps({
-    list: Array
+      list: Array
     })
 </script>
-
 
 <template>
     <div id="listWrapper">
         <div class="listElm" v-for="item in list">
             <div class="listTextElm">
                 Plan {{item.planID}}
-                <div :class="{kreis: item.activePlan }"></div>
+                <div :class="{ kreis: item.activePlan }"></div>
             </div>
-            <router-link :event="['keyup']" to="/{{item.link}}" class="btn">
+            <router-link :event="['keyup']" :to="{ name: 'plan', params: item }" class="btn">
               <div v-if="item.activePlan">
                   to active plan
               </div>
@@ -22,7 +21,7 @@
             </router-link>
         </div>
         <div class="listElm">
-          <router-link :event="['keyup']" to="/{{item.link}}" class="btn">
+          <router-link :event="['keyup']" to="/plan" class="btn">
             Add a plan
           </router-link>
         </div>

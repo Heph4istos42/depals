@@ -32,18 +32,16 @@
 </template>
 
 <script>
-  import StarRating from 'vue-star-rating';
-
 export default {
-    components: { StarRating},
-
     methods: {
         setRating(rating){
-        this.rating= rating;
+            this.rating= rating;
         }
     },
     data() {
-        return{rating: 0}
+        return{
+            rating: 0
+        }
     }
 }
 </script>

@@ -3,7 +3,7 @@
   import Menu from './parts/Menu.vue'
   import Liste from './parts/FoodElements.vue'
   import { getlebensmittelbyinput } from '../httprequest'
-  import router from './../router'
+  import router from '../router'
 </script>
 
 <template>
@@ -30,10 +30,11 @@
       onSearch() {
         //TODO: UserName Speichern
         getlebensmittelbyinput(this.input, "SimonUgar").then(res => {
-          console.debug(res);
-          if (res["ampelindikator"]) {
-            console.debug("barcode abfrage");
-            router.push("/food");
+          if (Object.keys(res).length == 2) {
+            //TODO: add food 
+            let barcode  = res['lebensmittel']['barcodeID'].toString();
+            console.debug(barcode)
+            router.push({ name: 'food', params: { barcodeID: barcode } });
           } else {
             this.list = res;
           }

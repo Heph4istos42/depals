@@ -2,6 +2,7 @@
   import HeaderElem from './parts/Header.vue'
   import Menu from './parts/Menu.vue'
   import { StreamBarcodeReader } from "vue-barcode-reader";
+  import router from '../router'
 </script>
 
 <template>
@@ -25,7 +26,10 @@ export default {
   },
   methods: {
     onDecode(text) {
-        console.log(` ${text}`);
+      let string = text.toString();
+      if (string == "4056489126669") { //only apfelsaft
+        router.push({ name: 'food', params: { barcodeID: string } });
+      }
     },
     onLoaded() {
     },

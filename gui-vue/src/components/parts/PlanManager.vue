@@ -7,7 +7,7 @@
         <div v-if="!activated" class="btnWrapper"> <button class="btn" :event="['keyup']" @click="activated = true"> <IconRedDot /> Activate Plan </button></div>
         <div v-else class="btnWrapper">  <button class="btn" :event="['keydkeyupwn']" disabled><IconGreenDot /> Active Plan </button> </div>
         <div class="btnWrapper"><button class="btn" :event="['keyup']" @click="activated = false">Reset</button></div>  
-        <div class="btnWrapper"><button class="btn" :event="['keyup']"> Rate Your Plan </button> </div>
+        <div class="btnWrapper"><router-link class="btn" :event="['keyup']" to="/planrating"> Rate Your Plan </router-link> </div>
     </div>
 </template>
 

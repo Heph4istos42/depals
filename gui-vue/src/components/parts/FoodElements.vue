@@ -1,18 +1,17 @@
 <script setup>
-defineProps({
-  list: Array
-})
+  defineProps({
+    list: Array
+  })
 </script>
 <template>
     <div id="listWrapper">
         <div class="listElm" v-for="item in list">
             <img :src="item.img" :alt="item.bezeichnung" width="100" height="100" />
-            <router-link :event="['keyup']" to="/food" class="btn">
+            <router-link :event="['keyup']" :to="{ name: 'food', params: item }" class="btn">
                 {{ item.bezeichnung }}
             </router-link>
         </div>
     </div>
-
 </template>
 
 <script>
@@ -30,7 +29,6 @@ defineProps({
     }
 </script>
 <style scoped >
-
     #listWrapper {
       margin-bottom: 64px;
       padding: 12px;

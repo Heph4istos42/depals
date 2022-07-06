@@ -1,16 +1,18 @@
 <script setup>
     import HeaderElem from './parts/Header.vue'
     import Menu from './parts/Menu.vue'
+    import { getAllLebensmittel, getlebensmittelbyinput } from '../httprequest'
+    import router from '../router';
 </script>
 
 <template>
     <HeaderElem title="Food" />
     <div class="plan">
-        <img :src="item.src" width="300" height="300">
+        <img :src="food.img" width="300" height="300">
         <div class="foodinfowrapper">
             <div class="food-bez-ampel">
                 <div class="half">
-                {{ item.name }}
+                {{ food.bezeichnung }}
                 </div>
                 <div class="kreis-wrapper half">
                     <div class="kreis green"  :class="{ active: green }" ></div>
@@ -20,27 +22,27 @@
             </div>
             <div class="food-info">
                 <div class="half">kcal:</div>
-                <div class="half"> {{ item.kcal }}</div>
+                <div class="half"> {{ food.kcal }}kcal</div>
             </div>
             <div class="food-info">
                 <div class="half">contains:</div>
-                <div class="half"> {{ item.contains}} </div>
+                <div class="half"> {{ food.contains}} </div>
             </div>
             <div class="food-info">
                 <div class="half">protein:</div>
-                <div class="half"> {{ item.protein }} </div>
+                <div class="half"> {{ food.protein }}g </div>
             </div>
             <div class="food-info">
                 <div class="half">carbohydrates:</div>
-                <div class="half"> {{ item.carbohydrates }} </div>
+                <div class="half"> {{ food.carbohydrates }}g </div>
             </div>
             <div class="food-info">
                 <div class="half">fat:</div>
-                <div class="half"> {{ item.fat }} </div>
+                <div class="half"> {{ food.fat }}g </div>
             </div>
             <div class="food-info">
-                <button class="btn half "> + add to plan</button>
-                <button class="btn half"> supplement and alternative food </button>
+                <button class="btn half"> + add to plan</button>
+                <button class="btn half" @click="toAlternatives"> supplement and alternative food </button>
             </div>
         </div>
     </div>
@@ -55,43 +57,58 @@ export default {
             green: false,
             yellow: false,
             red: false,
-            item: {
-                name: 'Milch',
-                kcal: '42 kcal',
-                contains: '/',
-                protein: '3,4g',
-                carbohydrates: '5g',
-                fat: '1g',
-                src: 'https://image.freepik.com/free-photo/image-human-brain_99433-298.jpg',
-                ampel: 3
-            }
+            food: {
+                barcodeID: "",
+                bezeichnung: "bezeichnung",
+                carbohydrates: 42,
+                contains: 42,
+                fat: 42,
+                img: "http://localhost/img/depals/mt.jpg",
+                kcal: 42,
+                protein: 21,
+            },
+            ampel: 0 
+        }
+    },
+    methods: {
+        toAlternatives(event) {
+            console.debug("click")
+            router.push( { name: "alternatives", params: { img: this.food.img } });
         }
     },
     mounted() {
-      switch (this.item.ampel) {
-        case 1:
-          this.green= true;
-          this.yellow = false;
-          this.red = false;
-          break; 
+        console.debug(this.$route.params);
+        getlebensmittelbyinput(this.$route.params.barcodeID, "SimonUgar").then(response => { 
+            console.debug(response);
+            this.ampel = response['ampelindikator'];
+            this.food = response['lebensmittel'];
+            console.debug(this.food);
+            
+            switch (this.ampel) {
+                case 1:
+                this.green= true;
+                this.yellow = false;
+                this.red = false;
+                break; 
 
-        case 2:
-          this.green= false;
-          this.yellow = true;
-          this.red = false;
-          break;
+                case 2:
+                this.green= false;
+                this.yellow = true;
+                this.red = false;
+                break;
 
-        case 3: 
-          this.green= false;
-          this.yellow = false;
-          this.red = true;
-          break;
+                case 0: 
+                this.green= false;
+                this.yellow = false;
+                this.red = true;
+                break;
 
-        default:
-          this.green= false;
-          this.yellow = false;
-          this.red = false;
-      }
+                default:
+                this.green= false;
+                this.yellow = false;
+                this.red = false;
+            }
+        });
     }
     
 }

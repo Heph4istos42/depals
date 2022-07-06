@@ -7,8 +7,8 @@
 </script>
 
 <template>
-  <HeaderElem title="Plan"/>
-  <PlanManager />
+  <HeaderElem title="alternative food"/>
+  <img :src="food.img" width="300" height="300">
   <div class="trenner"></div>
   <Liste :list=list /> 
   <Menu activate="settingsActive"/>
@@ -19,7 +19,7 @@
     data() {
       return {
         list: [],
-        plan: {}
+        food: {}
       } 
     },
     mounted() {
@@ -33,4 +33,10 @@
 </script>
 
 <style scoped>
+img {
+  padding-top: 80px;
+    width: 100%;
+    height: auto;
+    border-radius: 16px;
+}
 </style>

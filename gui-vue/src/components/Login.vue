@@ -12,7 +12,7 @@
         <router-link to="/">No Account? <br> Register <font-awesome-icon icon="fa-solid fa-arrow-right" /></router-link>
     </div>
     <div class="routerWrapper">
-        <router-link :event="['keyup']" to="/plan" class="btn">Login</router-link>
+        <router-link :event="['keyup']" to="/search" class="btn">Login</router-link>
     </div>
   </div>  
 </template>
