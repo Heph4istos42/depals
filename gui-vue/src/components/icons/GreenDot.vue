@@ -1,18 +1,13 @@
 <template>
-
-<span class="green"> </span>
-
+   <span class="green"> </span>
 </template>
-
-
 <style>
  .green {
-    width: 40px;
-    height: 40px;
+    width: 20px;
+    height: 20px;
     border-radius: 75%;
     background-color: green;
     display: inline-block;
-    margin-bottom:2px;
     vertical-align: middle;
  }
 </style>

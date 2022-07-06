@@ -1,6 +1,5 @@
 <script setup>
-import HeaderElem from './Header.vue'
-import MenuElem from './Menu.vue'
+import HeaderElem from './parts/Header.vue'
 </script>
 
 <template>
@@ -12,7 +11,6 @@ import MenuElem from './Menu.vue'
         Knoppf
     </button>
   </div>      
-  <MenuElem />
 </template>
 
 <script>

@@ -61,7 +61,7 @@ export default {
 
 </script>
 
-<style>
+<style scoped>
     .btnActivate {
         height: 50px;
         width: 250px;

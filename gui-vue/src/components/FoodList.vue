@@ -1,15 +1,12 @@
 <script setup>
-    import Trenner from './Trenner.vue'
-    import ListenElem from './Liste.vue'
+    import ListenElem from './parts/Liste.vue'
 </script>
 <template>
-<div class="center">
-    <img :src="item.src" width="300" height="300">
+    <div class="center">
+        <img :src="item.src" width="300" height="300">
     </div>
-    <Trenner />
+    <div class="trenner"></div>
     <ListenElem />
-
-
 </template>
 
 <script>
@@ -21,18 +18,11 @@ export default {
             }
         }
     }
-    
 }
 
 </script>
 
-<style>
-
-ul {
-  list-style-type: none;
-  padding: unset;
-}
-
+<style scoped>
 .list {
   display: flex;
   align-items: center;
@@ -43,12 +33,6 @@ ul {
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  font-weight: normal;
 }
 </style>
 

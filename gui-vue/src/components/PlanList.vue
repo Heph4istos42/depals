@@ -1,14 +1,11 @@
 <script setup>
-import HeaderElem from './parts/Header.vue'
-import Listen from './parts/Liste.vue'
-import PlanManager from './parts/PlanManager.vue'
-import Menu from './parts/Menu.vue'
+    import HeaderElem from './parts/Header.vue'
+    import Listen from './parts/Liste.vue'
+    import Menu from './parts/Menu.vue'
 </script>
 
 <template>
   <HeaderElem title="Plan"/>
-  <PlanManager />
-  <div class="trenner"></div>
   <Listen /> 
   <Menu activate="settingsActive"/>
 </template>
