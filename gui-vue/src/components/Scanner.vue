@@ -5,11 +5,14 @@
 </script>
 
 <template>
+  <div class="bg"></div>
   <HeaderElem title="Scanner"/>
-  <StreamBarcodeReader class="scanner-comp"
-    @decode="onDecode"
-    @loaded="onLoaded"
-    />
+  <div class="scannerWrapper">
+    <StreamBarcodeReader class="scanner-comp"
+      @decode="onDecode"
+      @loaded="onLoaded"
+      />
+  </div>
   <Menu activate="barcodeActive"/>
 </template>
 
@@ -31,11 +34,18 @@ export default {
 </script>
 
 <style>
-.scanner-comp {
-    width: 100%;
+.bg {
+  background-color: #2a2a2a;
+  width: 100%;
+  height: 100%;
+  position: absolute;
 }
-.scanner-comp > div > video {
+.scannerWrapper {
+  padding-top: 120px;
+}
+.scannerWrapper > .scanner-comp > div > video {
     width: 100%;
     height: 100%;
+    border-radius: 16px;
 }
 </style>
