@@ -7,7 +7,7 @@ defineProps({
     <div id="listWrapper">
         <div class="listElm" v-for="item in list">
             <img :src="item.img" :alt="item.bezeichnung" width="100" height="100" />
-            <router-link :event="['keyup']" to="/scanner" class="btn" @onkeyup="tmp">
+            <router-link :event="['keyup']" to="/food" class="btn">
                 {{ item.bezeichnung }}
             </router-link>
         </div>
@@ -23,11 +23,9 @@ defineProps({
         }
       },
       methods: {
-        tmp(event) {
-          getlebensmittelbyinput("4316268365888", "SimonUgar").then(res => {
-          console.debug(res);
-          });
-        }
+      },
+      mounted() {
+        console.debug(this.list);
       }
     }
 </script>

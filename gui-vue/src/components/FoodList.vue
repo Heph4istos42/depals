@@ -1,7 +1,7 @@
 <script setup>
     import HeaderElem from './parts/Header.vue'
     import Menu from './parts/Menu.vue'
-    import ListenElem from './parts/Liste.vue'
+    import ListenElem from './parts/FoodElements.vue'
 </script>
 
 <template>

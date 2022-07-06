@@ -1,6 +1,6 @@
 <script setup>
   import HeaderElem from './parts/Header.vue'
-  import Liste from './parts/Liste.vue'
+  import Liste from './parts/FoodElements.vue'
   import PlanManager from './parts/PlanManager.vue'
   import Menu from './parts/Menu.vue'
   import { getAllLebensmittel, getlebensmittelbyinput } from '../httprequest'
@@ -10,7 +10,7 @@
   <HeaderElem title="Plan"/>
   <PlanManager />
   <div class="trenner"></div>
-  <Liste :list=liste /> 
+  <Liste :list=list /> 
   <Menu activate="settingsActive"/>
 </template>
 
@@ -18,13 +18,13 @@
   export default {
     data() {
       return {
-        liste: ['mobile', 'tablet', 'dada']
+        list: []
       } 
     },
     mounted() {
       getAllLebensmittel().then(response => { 
         console.debug(response);
-        this.liste = response['lebensmittel'];
+        this.list = response['lebensmittel'];
         console.debug(this.liste[0]['bezeichnung']);
       });
     },

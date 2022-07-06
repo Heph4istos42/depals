@@ -65,6 +65,11 @@
           this.listActive = false;
           this.settingsActive = true
           break;
+        default:
+          this.barcodeActive= false;
+          this.addActive = false;
+          this.listActive = false;
+          this.settingsActive = false;
       }
       
     }

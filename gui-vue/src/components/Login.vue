@@ -22,13 +22,6 @@
     data() {
       return {
       } 
-    },
-    mounted() {
-      getAllLebensmittel().then(response => { 
-        console.debug(response);
-        this.data = response['lebensmittel'];
-        console.debug(this.data[0]['bezeichnung']);
-      });
     }
   }
 </script>
