@@ -1,3 +1,4 @@
+lebensmittelsSchema = LebensmittelSchema(many=True)
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 
@@ -59,15 +60,15 @@ class Plan(db.Model):
     planID = db.Column(db.Integer, primary_key=True)
     comment = db.Column(db.String(400))
     stars = db.Column(db.Integer)
-    planUser = db.Column(db.String(100), db.ForeignKey('nutzer.username'), primary_key=True)
+    userName = db.Column(db.String(100), db.ForeignKey('nutzer.username'), primary_key=True)
     lebensmittelOfPlan = db.relationship("Lebensmittel",
                     secondary=planLebensmittel)
 
-    def __init__(self, planID, comment, stars, planUser):
+    def __init__(self, planID, comment, stars, userName):
         self.planID = planID
         self.comment = comment
         self.stars = stars
-        self.planUser = planUser
+        self.userName = userName
 
 class Nutzer(db.Model):    
     username = db.Column(db.String(100), primary_key=True, nullable=False)
