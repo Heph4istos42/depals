@@ -1,12 +1,17 @@
 <script setup>
+    import HeaderElem from './parts/Header.vue'
+    import Menu from './parts/Menu.vue'
     import ListenElem from './parts/Liste.vue'
 </script>
+
 <template>
+    <HeaderElem titele="Food Liste" />
     <div class="center">
         <img :src="item.src" width="300" height="300">
     </div>
     <div class="trenner"></div>
     <ListenElem />
+    <Menu />
 </template>
 
 <script>

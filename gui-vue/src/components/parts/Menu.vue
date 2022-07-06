@@ -37,7 +37,6 @@
       }
     } ,
     mounted() {
-      console.debug(this.activate);
       switch (this.activate) {
         case "barcodeActive":
           this.barcodeActive= true;

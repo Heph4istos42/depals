@@ -1,6 +1,11 @@
+<script setup>
+defineProps({
+  list: Array
+})
+</script>
 <template>
     <div id="listWrapper">
-        <div class="listElm" v-for="item in lebensmittel">
+        <div class="listElm" v-for="item in list">
             <img :src="item.img" :alt="item.bezeichnung" width="100" height="100" />
             <router-link :event="['keyup']" to="/scanner" class="btn" @onkeyup="tmp">
                 {{ item.bezeichnung }}
@@ -11,20 +16,11 @@
 </template>
 
 <script>
-import { getAllLebensmittel, getlebensmittelbyinput } from '../../httprequest'
-
     export default {
       data() {
         return {
-            lebensmittel: []
+            list: []
         }
-      },
-      mounted() {
-        getAllLebensmittel().then(response => { 
-          console.debug(response);
-          this.lebensmittel = response['lebensmittel'];
-          console.debug(this.lebensmittel[0]['bezeichnung']);
-        });
       },
       methods: {
         tmp(event) {

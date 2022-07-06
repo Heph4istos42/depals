@@ -5,9 +5,9 @@
 </script>
 
 <template>
-  <HeaderElem title="Plan"/>
+  <HeaderElem title="Your plans"/>
   <Listen /> 
-  <Menu activate="settingsActive"/>
+  <Menu activate="listActive"/>
 </template>
 
 <script>

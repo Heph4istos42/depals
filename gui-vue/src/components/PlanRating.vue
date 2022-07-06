@@ -1,3 +1,8 @@
+<script setup>
+    import HeaderElem from './parts/Header.vue'
+    import Menu from './parts/Menu.vue'
+</script>
+
 <template>
   <div class="rating">
     

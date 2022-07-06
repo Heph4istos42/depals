@@ -1,14 +1,16 @@
 <script setup>
-import HeaderElem from './parts/Header.vue'
-import { StreamBarcodeReader } from "vue-barcode-reader";
+  import HeaderElem from './parts/Header.vue'
+  import Menu from './parts/Menu.vue'
+  import { StreamBarcodeReader } from "vue-barcode-reader";
 </script>
 
 <template>
-  <HeaderElem />
+  <HeaderElem title="Scanner"/>
   <StreamBarcodeReader class="scanner-comp"
     @decode="onDecode"
     @loaded="onLoaded"
     />
+  <Menu activate="barcodeActive"/>
 </template>
 
 <script>

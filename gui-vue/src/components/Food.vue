@@ -1,43 +1,50 @@
+<script setup>
+    import HeaderElem from './parts/Header.vue'
+    import Menu from './parts/Menu.vue'
+</script>
+
 <template>
+    <HeaderElem titele="Food" />
     <div class="plan">
-    <ul style="list-style-type: none; padding: unset">
-        <img :src="item.src" width="300" height="300">
-        <table border="0"> 
-        <tr>
-            <th> {{ item.name }}</th>
-            <th>
-                <div id="kreis-green"></div>
-                <div id="kreis-yellow"></div>
-                <div id="kreis-red"></div>
-            </th>
-        </tr>
-        <tr>
-            <td>kcal:</td>
-            <td> {{ item.kcal }}</td>
-        </tr>
-        <tr>
-            <td>contains:</td>
-            <td> {{ item.contains}} </td>
-        </tr>
-        <tr>
-            <td>protein:</td>
-            <td> {{ item.protein }} </td>
-        </tr>
-        <tr>
-            <td>carbohydrates:</td>
-            <td> {{ item.carbohydrates }} </td>
-        </tr>
-        <tr>
-            <td>fat:</td>
-            <td> {{ item.fat }} </td>
-        </tr>
-        <tr>
-            <td><button class="btnRate"> + add to plan</button></td>
-            <td><button class="btnRate"> supplement and alternative food </button></td>
-        </tr>
-        </table>
-    </ul>
+        <ul style="list-style-type: none; padding: unset">
+            <img :src="item.src" width="300" height="300">
+            <table border="0"> 
+            <tr>
+                <th> {{ item.name }}</th>
+                <th>
+                    <div id="kreis-green"></div>
+                    <div id="kreis-yellow"></div>
+                    <div id="kreis-red"></div>
+                </th>
+            </tr>
+            <tr>
+                <td>kcal:</td>
+                <td> {{ item.kcal }}</td>
+            </tr>
+            <tr>
+                <td>contains:</td>
+                <td> {{ item.contains}} </td>
+            </tr>
+            <tr>
+                <td>protein:</td>
+                <td> {{ item.protein }} </td>
+            </tr>
+            <tr>
+                <td>carbohydrates:</td>
+                <td> {{ item.carbohydrates }} </td>
+            </tr>
+            <tr>
+                <td>fat:</td>
+                <td> {{ item.fat }} </td>
+            </tr>
+            <tr>
+                <td><button class="btnRate"> + add to plan</button></td>
+                <td><button class="btnRate"> supplement and alternative food </button></td>
+            </tr>
+            </table>
+        </ul>
     </div>
+    <Menu />
 </template>
 
 

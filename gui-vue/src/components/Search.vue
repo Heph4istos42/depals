@@ -1,16 +1,19 @@
 <script setup>
-import HeaderElem from './parts/Header.vue'
+  import HeaderElem from './parts/Header.vue'
+  import Menu from './parts/Menu.vue'
+  import Liste from './parts/Liste.vue'
 </script>
 
 <template>
-  <HeaderElem />
-  <div>
-    <p>Input is: {{ input }}</p>
+  <HeaderElem title="Search"/>
+  <div class="searchWrapper">
     <input v-model="input" placeholder="Suche..." />
-    <button class="listitem" v-on:click="onSearch">
-        Knoppf
+    <button class="btn" v-on:click="onSearch">
+        <font-awesome-icon icon="fa-solid fa-magnifying-glass" />
     </button>
   </div>      
+  <Liste />
+  <Menu activate="addActive" />
 </template>
 
 <script>
@@ -18,6 +21,7 @@ export default {
   data () {
     return {
         input: "",
+        liste: ['mobile', 'tablet', 'dada']
     }
   },
   methods: {
@@ -28,12 +32,22 @@ export default {
 }
 </script>
 
-<style>
-.scanner-comp {
-    width: 100%;
-}
-.scanner-comp > div > video {
-    width: 100%;
-    height: 100%;
-}
+<style scoped>
+  .searchWrapper {
+    padding-top: 80px;
+    text-align: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    display: flex;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+  input {
+    width: 65%;
+  }
+  .btn {
+    margin-left: 8px;
+    width: 15%;
+  }
+
 </style>
