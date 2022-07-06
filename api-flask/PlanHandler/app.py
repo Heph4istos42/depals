@@ -35,15 +35,21 @@ def ping_pong():
 def addToPlan(planid, username, barcodeid):
     
     #add barcode id to plan 
-    plan = model.Plan.query.filter_by(planID=planid, userName=username).first()
-    print(planid)
-    print(username)
-    print(plan)
-    lebensmittel = model.Lebensmittel.query.filter_by(barcodeID=barcodeid).first()
-    print(lebensmittel)
-    plan.lebensmittelOfPlan.append(lebensmittel)
-    db.session.add()
-    db.session.commit()
+    try:
+        plan = model.Plan.query.filter_by(planID=planid, userName=username).first()
+        print(planid)
+        print(username)
+        print(plan)
+        lebensmittel = model.Lebensmittel.query.filter_by(barcodeID=barcodeid).first()
+        print(lebensmittel)
+        plan.lebensmittelOfPlan.append(lebensmittel)
+        db.session.add()
+        db.session.commit()
+    except Exception as err:
+        raise err
+    finally:
+        cleanup(db.session)
+
     return jsonify()# return plan
 
 @app.route('/createnewplan/<username>', methods=['POST'])
@@ -51,30 +57,51 @@ def createNewPlan(username):
     newPlan = model.Plan(comment = None,
                         stars = None,
                         userName = username)
-    db.session.add(newPlan)
-    db.session.commit()
-    plan = model.Plan.query.filter_by(userName=username).all()
-    res = model.plansSchema.dump(plan)
+    try:                                                
+        db.session.add(newPlan)
+        db.session.commit()
+        plan = model.Plan.query.filter_by(userName=username).all()
+        res = model.plansSchema.dump(plan)
+    except Exception as err:
+        raise err
+    finally:
+        cleanup(db.session)
     return jsonify(planList=res)
 
 @app.route('/getplansbyuser/<username>', methods=['GET'])
 def getPlanByUser(username):
-    plans = model.Plan.query.all()
-    planlist = model.plansSchema.dump(plans)
+    try:
+        plans = model.Plan.query.all()
+        planlist = model.plansSchema.dump(plans)
+    except Exception as err:
+        raise err
+    finally:
+        cleanup(db.session)
     return jsonify(planlist=planlist)
 
-@app.route('/getPlanById/<planid>', methods=['GET'])
-def getPlanByID(planid):
-    plan = model.Plan.query.filter_by(planID=planid).first()
-    response = model.planSchema.dump(plan)
+@app.route('/getplanbyidsnduser/<planid>/<username>', methods=['GET'])
+def getPlanByIdAndUser(planid):
+    try:
+        plan = model.Plan.query.filter_by(planID=planid, userName=username).first()
+        response = model.planSchema.dump(plan)
+    except Exception as err:
+        raise err
+    finally:
+        cleanup(db.session)
     return jsonify(plan=response)
 
-@app.route('/setStartsandComments/<planid>/<username>', methods=['PUT'])
-def setStartsandCommentsOfPlan(planid, username):
+@app.route('/setstarsandcomments/<planid>/<username>', methods=['PUT'])
+def setStarsandCommentsOfPlan(planid, username):
     data = request.get_json(silent=True)
 
     #TODO: check auth
-    plan = model.Plan.query.filter_by(planID=planid, userName=username).first()
+    try:
+        plan = model.Plan.query.filter_by(planID=planid, userName=username).first()
+    except Exception as err:
+        raise err
+    finally:
+        cleanup(db.session)
+
     if not plan:
         return jsonify("plan dont exists")
 
@@ -86,12 +113,18 @@ def setStartsandCommentsOfPlan(planid, username):
     plan.stars = data['stars']
     plan.comment = data['comment']
 
-    flag_modified(plan, "stars")
-    flag_modified(plan, "comment")
-    db.session.merge(plan)
-    db.session.flush()
-    db.session.commit()
-    responese = model.planSchema.dump(plan)
+    try:
+        flag_modified(plan, "stars")
+        flag_modified(plan, "comment")
+        db.session.merge(plan)
+        db.session.flush()
+        db.session.commit()
+        responese = model.planSchema.dump(plan)
+    except Exception as err:
+        raise err
+    finally:
+        cleanup(db.session)
+
     return jsonify(plan=responese)
 
 @app.route('/deleteplan/<planid>', methods=['DELETE'])
@@ -106,6 +139,11 @@ def removeFromPlan(planid, barcodeid):
     #check if item in plan 
     #remove item from plan  
     return jsonify()# return plan
-    
+
+def cleanup(session):
+    session.close() 
+    engine_container = db.get_engine(app)
+    engine_container.dispose()
+
 if __name__ == '__main__':
     app.run(host, port)

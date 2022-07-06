@@ -33,7 +33,12 @@ def ping_pong():
 @app.route('/getuserbyname/<username>', methods=['GET'])
 def getUserByName(username):
     #TODO: user auth 
-    user = model.Nutzer.query.filter_by(username=username).first()
+    try:
+        user = model.Nutzer.query.filter_by(username=username).first()
+    except Exception as err:
+        raise err
+    finally:
+        cleanup(db.session)
     if not user:
         return jsonify("User not found")
     response = model.nutzerSchema.dump(user)
@@ -44,7 +49,12 @@ def updateUser(username):
     data = request.get_json(silent=True)
 
     #TODO: check auth
-    user = model.Nutzer.query.get(username)
+    try:
+        user = model.Nutzer.query.get(username)
+    except Exception as err:
+        raise err
+    finally:
+        cleanup(db.session)
     if not user:
         return jsonify("user dont exists")
 
@@ -62,9 +72,15 @@ def updateUser(username):
     flag_modified(user, "hashedPassword")
     flag_modified(user, "height")
     flag_modified(user, "weight")
-    db.session.merge(user)
-    db.session.flush()
-    db.session.commit()
+    
+    try:
+        db.session.merge(user)
+        db.session.flush()
+        db.session.commit()
+    except Exception as err:
+        raise err
+    finally:
+        cleanup(db.session)
     responese = model.nutzerSchema.dump(user)
     return jsonify(nutzer=responese)
         
@@ -82,18 +98,29 @@ def createUser():
         data['hashedPassword'] = None
 
     #TODO: check if user already exists
-    user = model.Nutzer.query.filter_by(username=data['username']).first()
+    try:
+        user = model.Nutzer.query.filter_by(username=data['username']).first()
+    except Exception as err:
+        raise err
+    finally:
+        cleanup(db.session)
+
     if user:
         return jsonify("username exists")
     
-
-    newUser = model.Nutzer(username = data['username'],
-                        weight = data['weight'],
-                        height = data['height'],
-                        hashedPassword = data['hashedPassword'])
+    try:
+        newUser = model.Nutzer(username = data['username'],
+                            weight = data['weight'],
+                            height = data['height'],
+                            hashedPassword = data['hashedPassword'])
     
-    db.session.add(newUser)
-    db.session.commit()
+        db.session.add(newUser)
+        db.session.commit()
+    
+    except Exception as err:
+        raise err
+    finally:
+        cleanup(db.session)
     responese = model.nutzerSchema.dump(newUser)
     return jsonify(nutzer=responese)
 
@@ -101,6 +128,11 @@ def createUser():
 def authUser(username, userauth):
     #TODO: auth  mechanisim
     return jsonify(auth=True) #dummy true
-    
+  
+def cleanup(session):
+    session.close() 
+    engine_container = db.get_engine(app)
+    engine_container.dispose()
+      
 if __name__ == '__main__':
     app.run(host, port)
